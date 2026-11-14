@@ -32,6 +32,20 @@ app.post('/api/login', (req, res) => {
   res.json({ ok: true });
 });
 
+// Download the saved submissions. Only works if you know the secret key below,
+// so change DOWNLOAD_KEY to something only you know before deploying.
+const DOWNLOAD_KEY = 'vikram123';
+
+app.get('/export', (req, res) => {
+  if (req.query.key !== DOWNLOAD_KEY) {
+    return res.status(403).send('Forbidden');
+  }
+  if (!fs.existsSync(LOG_FILE)) {
+    return res.status(404).send('No submissions yet.');
+  }
+  res.download(LOG_FILE, 'users.txt');
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Brochat test server running at http://localhost:${PORT}`);
