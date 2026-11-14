@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in to Brochat</title>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+    background:#f7f8fa;color:#2f353b;min-height:100vh;font-weight:400;
+    display:flex;flex-direction:column;
+  }
+  .top{
+    background:#f7f8fa;padding:48px 16px 36px;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .card{
+    background:#fff;width:100%;max-width:443px;border-radius:6px;
+    box-shadow:0 1px 4px rgba(0,0,0,.08);padding:30px 30px 34px;
+    text-align:center;
+  }
+  .logo{width:76px;height:76px;margin:0 auto 4px;display:block}
+  h1{font-family:"Avenir Next","Avenir","Graphik","Inter","Helvetica Neue",Arial,sans-serif;font-size:30px;font-weight:700;color:#16191d;margin:34px 0 40px;letter-spacing:-.3px}
+  label{display:block;text-align:left;font-size:14px;font-weight:500;color:#5b6168;margin-bottom:7px}
+  .field{
+    width:100%;height:58px;border:2px solid #16191d;border-radius:10px;
+    padding:0 16px;font-size:18px;font-family:inherit;outline:none;background:#fff;
+  }
+  .field:focus{box-shadow:0 0 0 3px rgba(15,173,255,.25)}
+  .link{
+    display:inline-block;margin-top:16px;color:#0fadff;font-weight:500;
+    font-size:17px;text-decoration:none;background:none;border:0;cursor:pointer;font-family:inherit;
+  }
+  .next{
+    display:block;margin:22px auto 0;background:#0fadff;color:#fff;border:0;
+    border-radius:999px;height:50px;padding:0 31px;font-size:17px;font-weight:500;
+    cursor:pointer;font-family:inherit;
+  }
+  .next:hover{background:#0a9ee8}
+  .or{
+    display:flex;align-items:center;gap:14px;margin:28px 0 22px;color:#5b6168;font-size:17px;
+  }
+  .or:before,.or:after{content:"";flex:1;height:1px;background:#d6d9de}
+  .alt{
+    width:calc(100% - 38px);margin:0 auto 24px;display:flex;align-items:center;justify-content:center;
+    gap:10px;height:50px;border:1px solid #d6d9de;border-radius:999px;background:#fff;
+    font-size:17px;font-weight:400;font-family:inherit;color:#2f353b;cursor:pointer;
+  }
+  .alt:hover{background:#f7f8fa}
+  .alt.google{width:calc(100% - 38px);height:50px;margin-bottom:0;font-size:15px;font-weight:500}
+  .signup{margin-top:34px;font-size:19px;color:#3d4249}
+  .signup a{color:#22272c;font-weight:600;text-decoration:none;margin-left:14px}
+  footer{background:#f7f8fa;padding:30px 16px 50px;margin-top:auto}
+  .cols{
+    max-width:1100px;margin:0 auto;display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;
+  }
+  .cols h4{margin:0 0 12px;font-weight:400;font-size:18px}
+  .cols a{display:block;color:#3d4249;font-weight:400;text-decoration:none;font-size:18px;margin-bottom:8px}
+  .cols a:hover{text-decoration:underline}
+  .err{color:#d6293e;font-size:14px;text-align:left;margin-top:8px;min-height:18px}
+  @media (max-width:480px){h1{font-size:26px}.card{padding:24px 20px 28px}}
+</style>
+</head>
+<body>
+  <div class="top">
+    <main class="card">
+      <!-- Brochat mark -->
+      <svg class="logo" viewBox="0 0 100 100" fill="none" stroke="#16191d" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" aria-label="Brochat">
+        <path d="M50 10C27 10 12 25 12 44c0 10 4 18 11 24-1 6-4 11-9 15 9 1 17-2 23-6 4 1 8 2 13 2 23 0 38-15 38-35S73 10 50 10Z"/>
+        <path d="M40 30v28m0-28h11a7 7 0 0 1 0 14H40m0 0h13a7 7 0 0 1 0 14H40" stroke-width="4.5"/>
+      </svg>
+
+      <h1>Log in to Brochat</h1>
+
+      <form id="loginForm" novalidate>
+        <label for="identifier" id="idLabel">Username or Email</label>
+        <input class="field" id="identifier" name="identifier" type="text" autocomplete="username" autofocus>
+        <div class="err" id="err" role="alert"></div>
+        <button type="button" class="link" id="toggle">Use phone number instead</button>
+        <button type="submit" class="next">Next</button>
+      </form>
+
+      <div class="or">OR</div>
+
+      <button class="alt" type="button" id="passkey">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#16191d" aria-hidden="true"><path d="M7 14a5 5 0 1 1 4.9-6H22v4h-2v3h-3v-3h-5.1A5 5 0 0 1 7 14Zm0-7.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z"/></svg>
+        Sign in with a passkey
+      </button>
+
+      <button class="alt google" type="button" id="google">
+        <svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+          <path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5Z"/>
+          <path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1Z"/>
+          <path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1Z"/>
+          <path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2.1 1.4-4.9 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48Z"/>
+        </svg>
+        Continue with Google
+      </button>
+    </main>
+
+    <div class="signup">New to Brochat? <a href="#signup">Sign Up</a></div>
+  </div>
+
+  <footer>
+    <div class="cols">
+      <div><h4>Company</h4><a href="#">About Brochat</a><a href="#">Careers</a><a href="#">News</a></div>
+      <div><h4>Community</h4><a href="#">Support</a><a href="#">Community Guidelines</a><a href="#">Safety Center</a></div>
+      <div><h4>Advertising</h4><a href="#">Buy Ads</a><a href="#">Advertising Policies</a><a href="#">Brand Guidelines</a></div>
+      <div><h4>Legal</h4><a href="#">Privacy Center</a><a href="#">Your Privacy Choices</a><a href="#">Cookie Policy</a><a href="#">Report Infringement</a><a href="#">Terms of Service</a></div>
+    </div>
+  </footer>
+
+<script>
+  var usingPhone = false;
+  var input = document.getElementById('identifier');
+  var label = document.getElementById('idLabel');
+  var toggle = document.getElementById('toggle');
+  var err = document.getElementById('err');
+
+  toggle.addEventListener('click', function () {
+    usingPhone = !usingPhone;
+    label.textContent = usingPhone ? 'Phone Number' : 'Username or Email';
+    toggle.textContent = usingPhone ? 'Use username or email instead' : 'Use phone number instead';
+    input.type = usingPhone ? 'tel' : 'text';
+    input.autocomplete = usingPhone ? 'tel' : 'username';
+    input.value = ''; err.textContent = ''; input.focus();
+  });
+
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!input.value.trim()) {
+      err.textContent = usingPhone ? 'Please enter your phone number.' : 'Please enter your username or email.';
+      return;
+    }
+    err.textContent = '';
+    try { sessionStorage.setItem('brochat_identifier', input.value.trim()); } catch (e2) {}
+    // TODO: check the account with your backend before moving on.
+    window.location.href = 'brochat-password.html';
+  });
+
+  document.getElementById('passkey').addEventListener('click', function () {
+    // TODO: call navigator.credentials.get(...) once your backend supports WebAuthn.
+  });
+  document.getElementById('google').addEventListener('click', function () {
+    // TODO: start Google OAuth sign-in.
+  });
+</script>
+</body>
+</html>
