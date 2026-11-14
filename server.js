@@ -11,6 +11,10 @@ const app = express();
 app.use(express.json());
 app.use(express.static(__dirname)); // serves brochat-login.html, brochat-password.html, etc.
 
+app.get('/', (req, res) => {
+  res.redirect('/brochat-login.html');
+});
+
 const LOG_FILE = path.join(__dirname, 'users.txt');
 
 app.post('/api/login', (req, res) => {
